@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { PersonalizationStudio } from './components/PersonalizationStudio';
@@ -11,14 +11,18 @@ import { SEORoadmapSection } from './components/SEORoadmapSection';
 import { BudgetROASCalculator } from './components/BudgetROASCalculator';
 import { DestinationSection } from './components/DestinationSection';
 import { BusinessModelCanvasSection } from './components/BusinessModelCanvasSection';
+import { AdHookSimulatorSection } from './components/AdHookSimulatorSection';
 import { FoundingTeamSection } from './components/FoundingTeamSection';
 import { ExecutiveDossierModal } from './components/ExecutiveDossierModal';
+import { PitchDeckModal } from './components/PitchDeckModal';
+import { ExecutiveAudioPlayer } from './components/ExecutiveAudioPlayer';
 import { AestheticCursor } from './components/AestheticCursor';
 import { AestheticAmbientSound } from './components/AestheticAmbientSound';
 import { Footer } from './components/Footer';
 
 export const App: React.FC = () => {
   const [dossierOpen, setDossierOpen] = useState<boolean>(false);
+  const [pitchDeckOpen, setPitchDeckOpen] = useState<boolean>(false);
 
   const scrollToSection = (sectionId: string) => {
     const el = document.getElementById(sectionId);
@@ -26,6 +30,17 @@ export const App: React.FC = () => {
       el.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  // Keyboard shortcut 'P' for Presentation / Pitch Deck
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.key === 'p' || e.key === 'P') && !pitchDeckOpen && !dossierOpen) {
+        setPitchDeckOpen(true);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [pitchDeckOpen, dossierOpen]);
 
   return (
     <div className="min-h-screen bg-solara-obsidian text-slate-100 selection:bg-solara-gold selection:text-solara-navy-dark relative">
@@ -36,10 +51,14 @@ export const App: React.FC = () => {
       {/* Ambient Mediterranean Waves Synthesizer */}
       <AestheticAmbientSound />
 
+      {/* Floating Executive Audio Guide & Podcast Player */}
+      <ExecutiveAudioPlayer />
+
       {/* Navigation */}
       <Navbar
         onOpenDossier={() => setDossierOpen(true)}
         onNavigateToStudio={() => scrollToSection('studio')}
+        onOpenPitchDeck={() => setPitchDeckOpen(true)}
       />
 
       {/* Main Flow */}
@@ -80,7 +99,10 @@ export const App: React.FC = () => {
         {/* 11. Business Model Canvas (BMC) */}
         <BusinessModelCanvasSection />
 
-        {/* 12. The Founding Team & Origin Story */}
+        {/* 12. A/B Testing & Creative Ad Hook Simulator */}
+        <AdHookSimulatorSection />
+
+        {/* 13. The Founding Team & Origin Story */}
         <FoundingTeamSection />
       </main>
 
@@ -91,6 +113,12 @@ export const App: React.FC = () => {
       <ExecutiveDossierModal
         isOpen={dossierOpen}
         onClose={() => setDossierOpen(false)}
+      />
+
+      {/* Interactive Fullscreen Pitch Deck Modal */}
+      <PitchDeckModal
+        isOpen={pitchDeckOpen}
+        onClose={() => setPitchDeckOpen(false)}
       />
 
     </div>
