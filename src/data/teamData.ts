@@ -74,8 +74,8 @@ export const foundingTeamMembers: TeamMember[] = [
     skills: ['Positioning Maps', 'STP Framework', 'Buyer Personas', 'Customer Journey', 'CRM Architecture']
   },
   {
-    id: 'youssef-khaled',
-    name: 'يوسف خالد (Youssef Khaled)',
+    id: 'youssef-hisham',
+    name: 'يوسف هشام (Youssef Hisham)',
     roleAr: 'التحليل الموقفي، تكتيكات المزيج التسويقي 7Ps، وقنوات التواصل',
     roleEn: 'Situational Analysis, 7Ps Tactics, Flower of Service & Communication Mix',
     specialtyAr: 'استخلاص رؤى القطاع، بناء عناصر الـ 7Ps، وهندسة المزيج الاتصالي المتكامل',
