@@ -9,6 +9,8 @@ import { AICreativeLab } from './components/AICreativeLab';
 import { FunnelCalendarSection } from './components/FunnelCalendarSection';
 import { SEORoadmapSection } from './components/SEORoadmapSection';
 import { BudgetROASCalculator } from './components/BudgetROASCalculator';
+import { DestinationSection } from './components/DestinationSection';
+import { BusinessModelCanvasSection } from './components/BusinessModelCanvasSection';
 import { FoundingTeamSection } from './components/FoundingTeamSection';
 import { ExecutiveDossierModal } from './components/ExecutiveDossierModal';
 import { AestheticCursor } from './components/AestheticCursor';
@@ -72,7 +74,13 @@ export const App: React.FC = () => {
         {/* 9. Ad Spend & ROAS Simulator */}
         <BudgetROASCalculator />
 
-        {/* 10. The Founding Team & Origin Story */}
+        {/* 10. Regional Summer Destination Architecture */}
+        <DestinationSection />
+
+        {/* 11. Business Model Canvas (BMC) */}
+        <BusinessModelCanvasSection />
+
+        {/* 12. The Founding Team & Origin Story */}
         <FoundingTeamSection />
       </main>
 

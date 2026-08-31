@@ -33,7 +33,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDossier, onNavigateToStudi
     { label: 'معمل الـ AI', href: '#ai-lab', code: '04' },
     { label: 'القمع والـ SEO', href: '#funnel', code: '05' },
     { label: 'حاسبة الـ ROAS', href: '#calculator', code: '06' },
-    { label: 'فريق التأسيس', href: '#founding-team', code: '07' },
+    { label: 'الوجهات الساحلية', href: '#destinations', code: '07' },
+    { label: 'نموذج العمل (BMC)', href: '#bmc', code: '08' },
+    { label: 'فريق التأسيس', href: '#founding-team', code: '09' },
   ];
 
   return (
@@ -72,14 +74,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDossier, onNavigateToStudi
           </a>
 
           {/* Desktop Editorial Navigation Links */}
-          <nav className="hidden xl:flex items-center gap-1 glass-panel px-4 py-1.5 rounded-full border border-white/[0.08]">
+          <nav className="hidden 2xl:flex items-center gap-1 glass-panel px-3 py-1 rounded-full border border-white/[0.08]">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="px-3 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all flex items-center gap-1.5 group"
+                className="px-2.5 py-1 rounded-full text-[11px] font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all flex items-center gap-1 group"
               >
-                <span className="text-[10px] text-solara-gold/60 group-hover:text-solara-gold font-mono">
+                <span className="text-[9px] text-solara-gold/60 group-hover:text-solara-gold font-mono">
                   {item.code}
                 </span>
                 <span>{item.label}</span>
@@ -109,7 +111,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDossier, onNavigateToStudi
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="xl:hidden p-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white"
+            className="2xl:hidden p-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -121,15 +123,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDossier, onNavigateToStudi
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="xl:hidden bg-solara-obsidian/95 backdrop-blur-2xl border-b border-white/10 p-6 space-y-4 text-right"
+            className="2xl:hidden bg-solara-obsidian/95 backdrop-blur-2xl border-b border-white/10 p-6 space-y-4 text-right max-h-[85vh] overflow-y-auto"
           >
-            <div className="space-y-2">
+            <div className="space-y-1.5">
               {navItems.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block p-3 rounded-xl bg-white/5 text-slate-200 text-sm font-semibold hover:bg-solara-gold/15 hover:text-solara-gold transition-colors"
+                  className="block p-2.5 rounded-xl bg-white/5 text-slate-200 text-xs font-semibold hover:bg-solara-gold/15 hover:text-solara-gold transition-colors"
                 >
                   <span className="text-xs text-solara-gold ml-2 font-mono">[{item.code}]</span>
                   {item.label}
