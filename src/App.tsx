@@ -14,9 +14,9 @@ import { DestinationSection } from './components/DestinationSection';
 import { BusinessModelCanvasSection } from './components/BusinessModelCanvasSection';
 import { AdHookSimulatorSection } from './components/AdHookSimulatorSection';
 import { FoundingTeamSection } from './components/FoundingTeamSection';
-import { ExecutiveAudioPlayer } from './components/ExecutiveAudioPlayer';
 import { AestheticCursor } from './components/AestheticCursor';
 import { AestheticAmbientSound } from './components/AestheticAmbientSound';
+import { CoastalAtmosphere } from './components/CoastalAtmosphere';
 import { Footer } from './components/Footer';
 
 // Lazy-load heavy overlay modals on demand to keep initial bundle tiny and fast
@@ -31,6 +31,7 @@ const SolaraAppContent: React.FC = () => {
   const { language, isRTL } = useLanguage();
   const [dossierOpen, setDossierOpen] = useState<boolean>(false);
   const [pitchDeckOpen, setPitchDeckOpen] = useState<boolean>(false);
+  const [isOceanSoundActive, setIsOceanSoundActive] = useState<boolean>(false);
 
   const scrollToSection = (sectionId: string) => {
     const el = document.getElementById(sectionId);
@@ -55,14 +56,14 @@ const SolaraAppContent: React.FC = () => {
       language === 'ar' ? 'font-arabic' : 'font-sans'
     }`}>
       
+      {/* Visual Mediterranean Coastal Atmosphere & Light Caustics */}
+      <CoastalAtmosphere isSoundActive={isOceanSoundActive} />
+
       {/* Zero-Overhead Hardware-Accelerated Magnetic Cursor */}
       <AestheticCursor />
 
-      {/* Ambient Mediterranean Waves Synthesizer */}
-      <AestheticAmbientSound />
-
-      {/* Floating Executive Audio Guide & Podcast Player */}
-      <ExecutiveAudioPlayer />
+      {/* Atmospheric Mediterranean Coastal Waves Soundscape Engine */}
+      <AestheticAmbientSound onSoundStateChange={setIsOceanSoundActive} />
 
       {/* Navigation */}
       <Navbar
