@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Volume2, VolumeX, Waves, Sparkles } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export const AestheticAmbientSound: React.FC = () => {
+  const { language, isRTL, t } = useLanguage();
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const audioCtxRef = useRef<AudioContext | null>(null);
   const gainNodeRef = useRef<GainNode | null>(null);
@@ -84,11 +86,11 @@ export const AestheticAmbientSound: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-6 left-6 z-40">
+    <div className={`fixed bottom-6 z-40 ${isRTL ? 'left-6' : 'right-6'}`}>
       <button
         onClick={toggleSound}
-        className="group relative flex items-center gap-2.5 px-4 py-2 rounded-full glass-panel border border-solara-gold/30 hover:border-solara-gold text-slate-300 hover:text-white shadow-luxury backdrop-blur-xl transition-all hover:scale-105"
-        title="Ambient Mediterranean Ocean Waves Sound"
+        className="group relative flex items-center gap-2.5 px-4 py-2.5 rounded-full glass-panel border border-solara-gold/30 hover:border-solara-gold text-slate-300 hover:text-white shadow-luxury backdrop-blur-xl transition-all hover:scale-105 bg-solara-navy-dark/90"
+        title={t('Ambient Mediterranean Ocean Surf', 'تشغيل صوت أمواج البحر الأبيض المتوسط')}
       >
         <div className="relative flex items-center justify-center">
           {isPlaying ? (
@@ -101,12 +103,14 @@ export const AestheticAmbientSound: React.FC = () => {
           )}
         </div>
 
-        <div className="text-right text-[11px]">
+        <div className={`text-[11px] ${isRTL ? 'text-right' : 'text-left'}`}>
           <span className="font-semibold block text-slate-200 group-hover:text-solara-gold-light">
-            {isPlaying ? 'أجواء الساحل والأمواج' : 'تشغيل الأجواء الصوتية'}
+            {isPlaying 
+              ? t('Sahel Ocean Ambience', 'أجواء الساحل والأمواج') 
+              : t('Play Ocean Soundscape', 'تشغيل الأجواء الصوتية')}
           </span>
           <span className="text-[9px] text-slate-400 font-mono">
-            {isPlaying ? 'Coastal Ocean Audio (Active)' : 'Muted'}
+            {isPlaying ? 'Active Coastal Surf' : 'Muted'}
           </span>
         </div>
 

@@ -7,9 +7,12 @@ export interface Product {
   priceEGP: number;
   originalPriceEGP?: number;
   descriptionAr: string;
+  descriptionEn: string;
   featuresAr: string[];
+  featuresEn: string[];
   dimensions: string;
   materialsAr: string;
+  materialsEn: string;
   bgGradient: string;
   canvasTemplate: {
     baseColor: string;
@@ -20,30 +23,43 @@ export interface Product {
 
 export interface Persona {
   id: string;
-  name: string;
-  archetypeAr: string;
+  nameEn: string;
+  nameAr: string;
   archetypeEn: string;
+  archetypeAr: string;
   demographics: {
     age: string;
-    occupation: string;
-    incomeBracket: string;
-    location: string;
+    occupationEn: string;
+    occupationAr: string;
+    incomeBracketEn: string;
+    incomeBracketAr: string;
+    locationEn: string;
+    locationAr: string;
   };
-  quote: string;
-  psychographics: string[];
-  painPoints: string[];
-  solaraSolution: string;
-  preferredProducts: string[];
+  quoteEn: string;
+  quoteAr: string;
+  psychographicsEn: string[];
+  psychographicsAr: string[];
+  painPointsEn: string[];
+  painPointsAr: string[];
+  solaraSolutionEn: string;
+  solaraSolutionAr: string;
+  preferredProductsEn: string[];
+  preferredProductsAr: string[];
   avgOrderValue: string;
 }
 
 export interface Competitor {
   name: string;
-  category: string;
+  categoryEn: string;
+  categoryAr: string;
   priceRange: string;
-  strengths: string[];
-  weaknesses: string[];
-  solaraAdvantage: string;
+  strengthsEn: string[];
+  strengthsAr: string[];
+  weaknessesEn: string[];
+  weaknessesAr: string[];
+  solaraAdvantageEn: string;
+  solaraAdvantageAr: string;
   metrics: {
     personalization: number; // 0 to 100
     coastalAesthetics: number;
@@ -56,16 +72,22 @@ export interface Competitor {
 
 export interface FunnelStage {
   id: 'tofu' | 'mofu' | 'bofu';
-  titleAr: string;
   titleEn: string;
+  titleAr: string;
+  objectiveEn: string;
   objectiveAr: string;
-  contentTypes: string[];
-  keyHook: string;
-  kpis: { metric: string; target: string }[];
+  contentTypesEn: string[];
+  contentTypesAr: string[];
+  keyHookEn: string;
+  keyHookAr: string;
+  kpis: { metricEn: string; metricAr: string; target: string }[];
   samplePosts: {
-    headline: string;
+    headlineEn: string;
+    headlineAr: string;
     platform: 'Instagram' | 'TikTok' | 'Facebook';
-    hook: string;
-    cta: string;
+    hookEn: string;
+    hookAr: string;
+    ctaEn: string;
+    ctaAr: string;
   }[];
 }

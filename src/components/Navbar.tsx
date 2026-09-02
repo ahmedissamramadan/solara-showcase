@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import { Sparkles, BookOpen, Sun, Menu, X, Presentation } from 'lucide-react';
+import { Sparkles, BookOpen, Sun, Menu, X, Presentation, Globe } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 interface NavbarProps {
   onOpenDossier: () => void;
@@ -13,6 +14,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onNavigateToStudio,
   onOpenPitchDeck 
 }) => {
+  const { language, setLanguage, isRTL, t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
@@ -32,16 +34,16 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, []);
 
   const navItems = [
-    { label: 'الاستوديو الحي', href: '#studio', code: '01' },
-    { label: 'التحول الاستراتيجي', href: '#strategic-shift', code: '02' },
-    { label: 'مصفوفة المنافسين', href: '#competitors', code: '03' },
-    { label: 'معمل الـ AI', href: '#ai-lab', code: '04' },
-    { label: 'القمع والـ SEO', href: '#funnel', code: '05' },
-    { label: 'حاسبة الـ ROAS', href: '#calculator', code: '06' },
-    { label: 'الوجهات الساحلية', href: '#destinations', code: '07' },
-    { label: 'نموذج العمل (BMC)', href: '#bmc', code: '08' },
-    { label: 'محاكي الإعلانات', href: '#ad-simulator', code: '09' },
-    { label: 'فريق التأسيس', href: '#founding-team', code: '10' },
+    { labelEn: 'Live Studio', labelAr: 'الاستوديو الحي', href: '#studio', code: '01' },
+    { labelEn: 'Strategic Shift', labelAr: 'التحول الاستراتيجي', href: '#strategic-shift', code: '02' },
+    { labelEn: 'Competitor Matrix', labelAr: 'مصفوفة المنافسين', href: '#competitors', code: '03' },
+    { labelEn: 'AI Creative Lab', labelAr: 'معمل الـ AI', href: '#ai-lab', code: '04' },
+    { labelEn: 'Funnel & SEO', labelAr: 'القمع والـ SEO', href: '#funnel', code: '05' },
+    { labelEn: 'ROAS Simulator', labelAr: 'حاسبة الـ ROAS', href: '#calculator', code: '06' },
+    { labelEn: 'Destinations', labelAr: 'الوجهات الساحلية', href: '#destinations', code: '07' },
+    { labelEn: 'Business Model', labelAr: 'نموذج العمل', href: '#bmc', code: '08' },
+    { labelEn: 'Ad Hook Lab', labelAr: 'محاكي الإعلانات', href: '#ad-simulator', code: '09' },
+    { labelEn: 'Founding Team', labelAr: 'فريق التأسيس', href: '#founding-team', code: '10' },
   ];
 
   return (
@@ -49,7 +51,9 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Top Global Scroll Progress Bar */}
       <motion.div
         style={{ scaleX }}
-        className="fixed top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-solara-gold-light via-solara-gold to-solara-gold-dark origin-right z-50 shadow-gold-glow"
+        className={`fixed top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-solara-gold-light via-solara-gold to-solara-gold-dark z-50 shadow-gold-glow ${
+          isRTL ? 'origin-right' : 'origin-left'
+        }`}
       />
 
       <header
@@ -69,12 +73,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="w-9 h-9 rounded-2xl bg-gradient-to-br from-solara-gold/20 via-solara-gold/10 to-transparent border border-solara-gold/40 flex items-center justify-center text-solara-gold font-serif font-bold text-base shadow-gold-glow group-hover:scale-105 transition-transform">
               <Sun className="w-4 h-4 text-solara-gold group-hover:rotate-45 transition-transform duration-500" />
             </div>
-            <div className="text-right">
+            <div className={isRTL ? 'text-right' : 'text-left'}>
               <span className="text-lg font-bold tracking-[0.2em] text-white font-cinzel block group-hover:text-solara-gold-light transition-colors">
                 SOLARA
               </span>
               <span className="text-[8px] text-solara-gold/90 font-mono tracking-widest block uppercase">
-                Case Study Master
+                {t('ITI Capstone Master', 'دراسة حالة ITI المعتمدة')}
               </span>
             </div>
           </a>
@@ -85,52 +89,92 @@ export const Navbar: React.FC<NavbarProps> = ({
               <a
                 key={item.href}
                 href={item.href}
-                className="px-2 py-1 rounded-full text-[10px] font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all flex items-center gap-1 group"
+                className="px-2.5 py-1 rounded-full text-[10px] font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all flex items-center gap-1 group"
               >
                 <span className="text-[8px] text-solara-gold/60 group-hover:text-solara-gold font-mono">
                   {item.code}
                 </span>
-                <span>{item.label}</span>
+                <span>{language === 'en' ? item.labelEn : item.labelAr}</span>
               </a>
             ))}
           </nav>
 
-          {/* Action CTAs */}
+          {/* Action CTAs & Language Switcher */}
           <div className="hidden sm:flex items-center gap-2.5">
             
+            {/* Apple-grade Luxury Language Switcher */}
+            <div className="flex items-center p-1 rounded-full bg-black/40 border border-white/10 backdrop-blur-md shadow-inner">
+              <button
+                type="button"
+                onClick={() => setLanguage('en')}
+                className={`px-2.5 py-1 rounded-full text-[10px] font-bold font-mono transition-all ${
+                  language === 'en'
+                    ? 'bg-solara-gold text-solara-navy-dark shadow-gold-glow'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+                title="Switch to English"
+              >
+                EN
+              </button>
+              <button
+                type="button"
+                onClick={() => setLanguage('ar')}
+                className={`px-2.5 py-1 rounded-full text-[10px] font-bold font-arabic transition-all ${
+                  language === 'ar'
+                    ? 'bg-solara-gold text-solara-navy-dark shadow-gold-glow'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+                title="التحويل للغة العربية"
+              >
+                عربي
+              </button>
+            </div>
+
             {/* Pitch Deck Button */}
             <button
               onClick={onOpenPitchDeck}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-solara-gold/15 hover:bg-solara-gold/25 text-solara-gold-light border border-solara-gold/40 text-xs font-semibold backdrop-blur-md transition-all shadow-gold-glow hover:scale-105"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-solara-gold/15 hover:bg-solara-gold/25 text-solara-gold-light border border-solara-gold/40 text-xs font-semibold backdrop-blur-md transition-all shadow-gold-glow hover:scale-105"
             >
               <Presentation className="w-3.5 h-3.5 text-solara-gold" />
-              <span>عرض تقديمي (Pitch)</span>
+              <span>{t('Pitch Deck (P)', 'عرض تقديمي (P)')}</span>
             </button>
 
+            {/* Executive Dossier */}
             <button
               onClick={onOpenDossier}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-slate-200 hover:text-white text-xs font-semibold border border-white/10 hover:border-solara-gold/40 backdrop-blur-md transition-all"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-slate-200 hover:text-white text-xs font-semibold border border-white/10 hover:border-solara-gold/40 backdrop-blur-md transition-all"
             >
               <BookOpen className="w-3.5 h-3.5 text-solara-gold" />
-              <span>المستند التنفيذي</span>
+              <span>{t('Dossier', 'المستند')}</span>
             </button>
 
+            {/* Live Studio CTA */}
             <button
               onClick={onNavigateToStudio}
               className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-solara-gold-light via-solara-gold to-solara-gold-dark text-solara-navy-dark text-xs font-bold shadow-gold-glow hover:shadow-luxury hover:scale-105 transition-all"
             >
               <Sparkles className="w-3.5 h-3.5 text-solara-navy-dark" />
-              <span>الاستوديو الحي</span>
+              <span>{t('Live Studio', 'الاستوديو الحي')}</span>
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="2xl:hidden p-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white"
-          >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+          {/* Mobile Actions: Language Toggle & Menu Button */}
+          <div className="flex items-center gap-2 2xl:hidden">
+            <button
+              onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
+              className="px-2.5 py-1 rounded-full bg-solara-gold/15 border border-solara-gold/30 text-solara-gold text-xs font-mono font-bold flex items-center gap-1"
+            >
+              <Globe className="w-3 h-3" />
+              <span>{language === 'en' ? 'AR' : 'EN'}</span>
+            </button>
+
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
 
         </div>
 
@@ -139,7 +183,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="2xl:hidden bg-solara-obsidian/95 backdrop-blur-2xl border-b border-white/10 p-6 space-y-4 text-right max-h-[85vh] overflow-y-auto"
+            className={`2xl:hidden bg-solara-obsidian/95 backdrop-blur-2xl border-b border-white/10 p-6 space-y-4 max-h-[85vh] overflow-y-auto ${
+              isRTL ? 'text-right' : 'text-left'
+            }`}
           >
             <div className="space-y-1">
               {navItems.map((item) => (
@@ -147,10 +193,12 @@ export const Navbar: React.FC<NavbarProps> = ({
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block p-2 rounded-xl bg-white/5 text-slate-200 text-xs font-semibold hover:bg-solara-gold/15 hover:text-solara-gold transition-colors"
+                  className="block p-2.5 rounded-xl bg-white/5 text-slate-200 text-xs font-semibold hover:bg-solara-gold/15 hover:text-solara-gold transition-colors"
                 >
-                  <span className="text-xs text-solara-gold ml-2 font-mono">[{item.code}]</span>
-                  {item.label}
+                  <span className={`text-xs text-solara-gold font-mono ${isRTL ? 'ml-2' : 'mr-2'}`}>
+                    [{item.code}]
+                  </span>
+                  {language === 'en' ? item.labelEn : item.labelAr}
                 </a>
               ))}
             </div>
@@ -161,10 +209,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                   setMobileMenuOpen(false);
                   onOpenPitchDeck();
                 }}
-                className="w-full py-2.5 rounded-xl bg-solara-gold/20 text-solara-gold-light text-xs font-bold border border-solara-gold/40 flex items-center justify-center gap-2"
+                className="w-full flex items-center justify-center gap-2 p-3 rounded-xl bg-solara-gold/15 border border-solara-gold/30 text-solara-gold-light text-xs font-bold"
               >
                 <Presentation className="w-4 h-4" />
-                <span>فتح العرض التقديمي (Pitch Deck)</span>
+                <span>{t('Launch Pitch Deck (P)', 'فتح العرض التقديمي (Pitch)')}</span>
               </button>
 
               <button
@@ -172,10 +220,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                   setMobileMenuOpen(false);
                   onOpenDossier();
                 }}
-                className="w-full py-2.5 rounded-xl bg-white/5 text-slate-200 text-xs font-bold border border-white/10 flex items-center justify-center gap-2"
+                className="w-full flex items-center justify-center gap-2 p-3 rounded-xl bg-white/5 border border-white/10 text-slate-200 text-xs font-bold"
               >
-                <BookOpen className="w-4 h-4 text-solara-gold" />
-                <span>قراءة المستند التنفيذي الكامل</span>
+                <BookOpen className="w-4 h-4" />
+                <span>{t('Executive Dossier & Strategy', 'المستند التنفيذي ودراسة الحالة')}</span>
               </button>
 
               <button
@@ -183,10 +231,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                   setMobileMenuOpen(false);
                   onNavigateToStudio();
                 }}
-                className="w-full py-2.5 rounded-xl bg-solara-gold text-solara-navy-dark text-xs font-bold shadow-gold-glow flex items-center justify-center gap-2"
+                className="w-full flex items-center justify-center gap-2 p-3 rounded-xl bg-gradient-to-r from-solara-gold to-solara-gold-dark text-solara-navy-dark text-xs font-bold shadow-gold-glow"
               >
                 <Sparkles className="w-4 h-4" />
-                <span>فتح استوديو التخصيص الحي</span>
+                <span>{t('Open Personalization Studio', 'تجربة استوديو التخصيص الحي')}</span>
               </button>
             </div>
           </motion.div>

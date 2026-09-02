@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
+import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { PersonalizationStudio } from './components/PersonalizationStudio';
@@ -13,14 +14,21 @@ import { DestinationSection } from './components/DestinationSection';
 import { BusinessModelCanvasSection } from './components/BusinessModelCanvasSection';
 import { AdHookSimulatorSection } from './components/AdHookSimulatorSection';
 import { FoundingTeamSection } from './components/FoundingTeamSection';
-import { ExecutiveDossierModal } from './components/ExecutiveDossierModal';
-import { PitchDeckModal } from './components/PitchDeckModal';
 import { ExecutiveAudioPlayer } from './components/ExecutiveAudioPlayer';
 import { AestheticCursor } from './components/AestheticCursor';
 import { AestheticAmbientSound } from './components/AestheticAmbientSound';
 import { Footer } from './components/Footer';
 
-export const App: React.FC = () => {
+// Lazy-load heavy overlay modals on demand to keep initial bundle tiny and fast
+const ExecutiveDossierModal = lazy(() =>
+  import('./components/ExecutiveDossierModal').then((m) => ({ default: m.ExecutiveDossierModal }))
+);
+const PitchDeckModal = lazy(() =>
+  import('./components/PitchDeckModal').then((m) => ({ default: m.PitchDeckModal }))
+);
+
+const SolaraAppContent: React.FC = () => {
+  const { language, isRTL } = useLanguage();
   const [dossierOpen, setDossierOpen] = useState<boolean>(false);
   const [pitchDeckOpen, setPitchDeckOpen] = useState<boolean>(false);
 
@@ -43,9 +51,11 @@ export const App: React.FC = () => {
   }, [pitchDeckOpen, dossierOpen]);
 
   return (
-    <div className="min-h-screen bg-solara-obsidian text-slate-100 selection:bg-solara-gold selection:text-solara-navy-dark relative">
+    <div className={`min-h-screen bg-solara-obsidian text-slate-100 selection:bg-solara-gold selection:text-solara-navy-dark relative ${
+      language === 'ar' ? 'font-arabic' : 'font-sans'
+    }`}>
       
-      {/* Luxury Custom Magnetic Cursor */}
+      {/* Zero-Overhead Hardware-Accelerated Magnetic Cursor */}
       <AestheticCursor />
 
       {/* Ambient Mediterranean Waves Synthesizer */}
@@ -76,52 +86,84 @@ export const App: React.FC = () => {
         <StrategicShiftSection />
 
         {/* 4. Competitors Benchmark & Blue Ocean Matrix */}
-        <CompetitorMatrix />
+        <div className="section-optimized">
+          <CompetitorMatrix />
+        </div>
 
         {/* 5. Brand Identity & 4-Layer Unboxing */}
-        <BrandIdentitySection />
+        <div className="section-optimized">
+          <BrandIdentitySection />
+        </div>
 
         {/* 6. AI Creative Engine & UGC Lab */}
-        <AICreativeLab />
+        <div className="section-optimized">
+          <AICreativeLab />
+        </div>
 
         {/* 7. Marketing Funnel & Content Roadmaps */}
-        <FunnelCalendarSection />
+        <div className="section-optimized">
+          <FunnelCalendarSection />
+        </div>
 
         {/* 8. Organic SEO Blueprint */}
-        <SEORoadmapSection />
+        <div className="section-optimized">
+          <SEORoadmapSection />
+        </div>
 
         {/* 9. Ad Spend & ROAS Simulator */}
-        <BudgetROASCalculator />
+        <div className="section-optimized">
+          <BudgetROASCalculator />
+        </div>
 
         {/* 10. Regional Summer Destination Architecture */}
-        <DestinationSection />
+        <div className="section-optimized">
+          <DestinationSection />
+        </div>
 
         {/* 11. Business Model Canvas (BMC) */}
-        <BusinessModelCanvasSection />
+        <div className="section-optimized">
+          <BusinessModelCanvasSection />
+        </div>
 
         {/* 12. A/B Testing & Creative Ad Hook Simulator */}
-        <AdHookSimulatorSection />
+        <div className="section-optimized">
+          <AdHookSimulatorSection />
+        </div>
 
         {/* 13. The Founding Team & Origin Story */}
-        <FoundingTeamSection />
+        <div className="section-optimized">
+          <FoundingTeamSection />
+        </div>
       </main>
 
       {/* Footer */}
       <Footer />
 
-      {/* Executive Dossier Reader Modal */}
-      <ExecutiveDossierModal
-        isOpen={dossierOpen}
-        onClose={() => setDossierOpen(false)}
-      />
-
-      {/* Interactive Fullscreen Pitch Deck Modal */}
-      <PitchDeckModal
-        isOpen={pitchDeckOpen}
-        onClose={() => setPitchDeckOpen(false)}
-      />
+      {/* Lazily Loaded Heavy Modals wrapped in Suspense */}
+      <Suspense fallback={null}>
+        {dossierOpen && (
+          <ExecutiveDossierModal
+            isOpen={dossierOpen}
+            onClose={() => setDossierOpen(false)}
+          />
+        )}
+        {pitchDeckOpen && (
+          <PitchDeckModal
+            isOpen={pitchDeckOpen}
+            onClose={() => setPitchDeckOpen(false)}
+          />
+        )}
+      </Suspense>
 
     </div>
+  );
+};
+
+export const App: React.FC = () => {
+  return (
+    <LanguageProvider>
+      <SolaraAppContent />
+    </LanguageProvider>
   );
 };
 
