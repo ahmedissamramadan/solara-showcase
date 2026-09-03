@@ -6,6 +6,10 @@ export interface Product {
   category: 'tote' | 'hat' | 'clutch' | 'crossbody';
   priceEGP: number;
   originalPriceEGP?: number;
+  imageUrl?: string;
+  liveStoreUrl?: string;
+  handle?: string;
+  inStock?: boolean;
   descriptionAr: string;
   descriptionEn: string;
   featuresAr: string[];

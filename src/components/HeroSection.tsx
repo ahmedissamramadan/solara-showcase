@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight, ArrowLeft, Sun, ChevronDown, GraduationCap } from 'lucide-react';
+import { Sparkles, ArrowRight, ArrowLeft, Sun, ChevronDown, GraduationCap, ShoppingBag } from 'lucide-react';
 import { caseStudyOverview } from '../data/caseStudyData';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -113,6 +113,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onExploreCaseStudy, on
               <ArrowRight className="w-4 h-4 text-solara-gold" />
             )}
           </button>
+
+          <a
+            href="#live-store"
+            className="w-full sm:w-auto px-6 py-4 rounded-full bg-solara-gold/15 hover:bg-solara-gold/25 text-solara-gold-light font-bold text-sm border border-solara-gold/40 backdrop-blur-xl transition-all flex items-center justify-center gap-2.5 shadow-gold-glow hover:scale-105"
+          >
+            <ShoppingBag className="w-4 h-4 text-solara-gold" />
+            <span>{t('Live Store & Social Channels', 'المتجر والمنظومة الحية')}</span>
+          </a>
         </motion.div>
 
         {/* Architectural Live Metrics Row */}

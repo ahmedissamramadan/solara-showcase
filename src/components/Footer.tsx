@@ -1,6 +1,19 @@
-import React from 'react';
-import { ArrowUp, Sun, HeartHandshake, GraduationCap } from 'lucide-react';
+import { ArrowUp, Sun, HeartHandshake, ShoppingBag, ExternalLink } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+
+const InstagramIcon: React.FC<{ className?: string }> = ({ className = "w-4 h-4" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+  </svg>
+);
+
+const FacebookIcon: React.FC<{ className?: string }> = ({ className = "w-4 h-4" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  </svg>
+);
 
 export const Footer: React.FC = () => {
   const { language, isRTL, t } = useLanguage();
@@ -43,11 +56,48 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Quick Links & Back to Top */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 text-xs text-slate-400">
+        {/* Official Omnichannel Channels Hub */}
+        <div className="flex flex-col items-center md:items-end gap-3 text-xs">
+          <span className="text-solara-gold font-mono text-[11px] font-bold tracking-wider uppercase">
+            {t('Official Brand Channels', 'قنوات البراند الرسمية')}
+          </span>
+          <div className="flex items-center gap-2">
+            <a
+              href="https://www.solaraeg.shop/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-solara-gold/15 hover:bg-solara-gold/30 text-solara-gold-light border border-solara-gold/40 transition-all text-xs font-mono font-bold"
+              title="Official Shopify Store"
+            >
+              <ShoppingBag className="w-3.5 h-3.5" />
+              <span>solaraeg.shop</span>
+              <ExternalLink className="w-3 h-3 text-solara-gold/70" />
+            </a>
+
+            <a
+              href="https://www.instagram.com/solara.eg.shop"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-full bg-pink-500/10 hover:bg-pink-500/20 text-pink-400 border border-pink-500/30 transition-all"
+              title="Instagram @solara.eg.shop"
+            >
+              <InstagramIcon className="w-4 h-4" />
+            </a>
+
+            <a
+              href="https://www.facebook.com/profile.php?id=61590285145771"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-full bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 border border-blue-500/30 transition-all"
+              title="Facebook @SOLARA Egypt"
+            >
+              <FacebookIcon className="w-4 h-4" />
+            </a>
+          </div>
+
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 transition-all hover:text-solara-gold hover:border-solara-gold/40 shadow-glass"
+            className="mt-2 flex items-center gap-2 px-5 py-2 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 transition-all hover:text-solara-gold hover:border-solara-gold/40 shadow-glass text-xs"
           >
             <span>{t('Back to Top', 'العودة للأعلى')}</span>
             <ArrowUp className="w-3.5 h-3.5" />

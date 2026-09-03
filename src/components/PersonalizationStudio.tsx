@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Download, Check, Shield, Gift } from 'lucide-react';
+import { Sparkles, Download, Check, Shield, Gift, ShoppingBag, ExternalLink } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { solaraProducts } from '../data/productsData';
 import { Product } from '../types/solara';
@@ -193,6 +193,19 @@ export const PersonalizationStudio: React.FC = () => {
                     <Gift className="w-4 h-4 text-solara-gold" />
                     <span>{t('Gift Certificate Card', 'شهادة الإهداء الفاخرة')}</span>
                   </button>
+
+                  {selectedProduct.liveStoreUrl && (
+                    <a
+                      href={selectedProduct.liveStoreUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-solara-gold/15 hover:bg-solara-gold/30 text-solara-gold-light font-bold text-xs border border-solara-gold/40 transition-all shadow-gold-glow"
+                    >
+                      <ShoppingBag className="w-3.5 h-3.5 text-solara-gold" />
+                      <span>{t('Order on Official Store', 'اطلب من المتجر الحي')}</span>
+                      <ExternalLink className="w-3 h-3 text-solara-gold/80" />
+                    </a>
+                  )}
                 </div>
 
                 <div className={isRTL ? 'text-left' : 'text-right'}>

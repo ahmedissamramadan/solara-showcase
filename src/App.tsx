@@ -2,6 +2,7 @@ import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
+import { LiveStoreEcosystemSection } from './components/LiveStoreEcosystemSection';
 import { PersonalizationStudio } from './components/PersonalizationStudio';
 import { StrategicShiftSection } from './components/StrategicShiftSection';
 import { CompetitorMatrix } from './components/CompetitorMatrix';
@@ -80,58 +81,61 @@ const SolaraAppContent: React.FC = () => {
           onGoToStudio={() => scrollToSection('studio')}
         />
 
-        {/* 2. Interactive Personalization Studio */}
+        {/* 2. Official Live Store & Social Ecosystem Hub */}
+        <LiveStoreEcosystemSection />
+
+        {/* 3. Interactive Personalization Studio */}
         <PersonalizationStudio />
 
-        {/* 3. The Strategic Shift & Personas */}
+        {/* 4. The Strategic Shift & Personas */}
         <StrategicShiftSection />
 
-        {/* 4. Competitors Benchmark & Blue Ocean Matrix */}
+        {/* 5. Competitors Benchmark & Blue Ocean Matrix */}
         <div className="section-optimized">
           <CompetitorMatrix />
         </div>
 
-        {/* 5. Brand Identity & 4-Layer Unboxing */}
+        {/* 6. Brand Identity & 4-Layer Unboxing */}
         <div className="section-optimized">
           <BrandIdentitySection />
         </div>
 
-        {/* 6. AI Creative Engine & UGC Lab */}
+        {/* 7. AI Creative Engine & UGC Lab */}
         <div className="section-optimized">
           <AICreativeLab />
         </div>
 
-        {/* 7. Marketing Funnel & Content Roadmaps */}
+        {/* 8. Marketing Funnel & Content Roadmaps */}
         <div className="section-optimized">
           <FunnelCalendarSection />
         </div>
 
-        {/* 8. Organic SEO Blueprint */}
+        {/* 9. Organic SEO Blueprint */}
         <div className="section-optimized">
           <SEORoadmapSection />
         </div>
 
-        {/* 9. Ad Spend & ROAS Simulator */}
+        {/* 10. Ad Spend & ROAS Simulator */}
         <div className="section-optimized">
           <BudgetROASCalculator />
         </div>
 
-        {/* 10. Regional Summer Destination Architecture */}
+        {/* 11. Regional Summer Destination Architecture */}
         <div className="section-optimized">
           <DestinationSection />
         </div>
 
-        {/* 11. Business Model Canvas (BMC) */}
+        {/* 12. Business Model Canvas (BMC) */}
         <div className="section-optimized">
           <BusinessModelCanvasSection />
         </div>
 
-        {/* 12. A/B Testing & Creative Ad Hook Simulator */}
+        {/* 13. A/B Testing & Creative Ad Hook Simulator */}
         <div className="section-optimized">
           <AdHookSimulatorSection />
         </div>
 
-        {/* 13. The Founding Team & Origin Story */}
+        {/* 14. The Founding Team & Origin Story */}
         <div className="section-optimized">
           <FoundingTeamSection />
         </div>

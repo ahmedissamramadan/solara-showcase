@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import { Sparkles, BookOpen, Sun, Menu, X, Presentation, Globe } from 'lucide-react';
+import { Sparkles, BookOpen, Sun, Menu, X, Presentation, ShoppingBag, ExternalLink } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 interface NavbarProps {
@@ -34,16 +34,17 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, []);
 
   const navItems = [
-    { labelEn: 'Live Studio', labelAr: 'الاستوديو الحي', href: '#studio', code: '01' },
+    { labelEn: 'Live Store', labelAr: 'المتجر الحي', href: '#live-store', code: '00' },
+    { labelEn: 'Studio', labelAr: 'الاستوديو', href: '#studio', code: '01' },
     { labelEn: 'Strategic Shift', labelAr: 'التحول الاستراتيجي', href: '#strategic-shift', code: '02' },
-    { labelEn: 'Competitor Matrix', labelAr: 'مصفوفة المنافسين', href: '#competitors', code: '03' },
-    { labelEn: 'AI Creative Lab', labelAr: 'معمل الـ AI', href: '#ai-lab', code: '04' },
-    { labelEn: 'Funnel & SEO', labelAr: 'القمع والـ SEO', href: '#funnel', code: '05' },
-    { labelEn: 'ROAS Simulator', labelAr: 'حاسبة الـ ROAS', href: '#calculator', code: '06' },
-    { labelEn: 'Destinations', labelAr: 'الوجهات الساحلية', href: '#destinations', code: '07' },
-    { labelEn: 'Business Model', labelAr: 'نموذج العمل', href: '#bmc', code: '08' },
-    { labelEn: 'Ad Hook Lab', labelAr: 'محاكي الإعلانات', href: '#ad-simulator', code: '09' },
-    { labelEn: 'Founding Team', labelAr: 'فريق التأسيس', href: '#founding-team', code: '10' },
+    { labelEn: 'Competitors', labelAr: 'المنافسين', href: '#competitors', code: '03' },
+    { labelEn: 'AI Lab', labelAr: 'معمل الـ AI', href: '#ai-lab', code: '04' },
+    { labelEn: 'Funnel', labelAr: 'القمع البيعي', href: '#funnel', code: '05' },
+    { labelEn: 'ROAS', labelAr: 'العائد الإعلاني', href: '#calculator', code: '06' },
+    { labelEn: 'Destinations', labelAr: 'الوجهات', href: '#destinations', code: '07' },
+    { labelEn: 'BMC', labelAr: 'نموذج العمل', href: '#bmc', code: '08' },
+    { labelEn: 'Ad Hooks', labelAr: 'محاكي الإعلانات', href: '#ad-simulator', code: '09' },
+    { labelEn: 'Founders', labelAr: 'فريق التأسيس', href: '#founding-team', code: '10' },
   ];
 
   return (
@@ -100,8 +101,22 @@ export const Navbar: React.FC<NavbarProps> = ({
           </nav>
 
           {/* Action CTAs & Language Switcher */}
-          <div className="hidden sm:flex items-center gap-2.5">
+          <div className="hidden sm:flex items-center gap-2">
             
+            {/* Direct Link to Live Shopify Store */}
+            <a
+              href="https://www.solaraeg.shop/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-solara-gold/15 hover:bg-solara-gold/25 text-solara-gold-light border border-solara-gold/40 text-xs font-semibold backdrop-blur-md transition-all shadow-gold-glow hover:scale-105"
+              title={t('Visit Live Shopify Store (solaraeg.shop)', 'زيارة المتجر الرسمي على شوبيفاي')}
+            >
+              <ShoppingBag className="w-3.5 h-3.5 text-solara-gold" />
+              <span className="hidden xl:inline">solaraeg.shop</span>
+              <span className="xl:hidden">{t('Store', 'المتجر')}</span>
+              <ExternalLink className="w-3 h-3 text-solara-gold/70" />
+            </a>
+
             {/* Apple-grade Luxury Language Switcher */}
             <div className="flex items-center p-1 rounded-full bg-black/40 border border-white/10 backdrop-blur-md shadow-inner">
               <button
@@ -133,7 +148,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Pitch Deck Button */}
             <button
               onClick={onOpenPitchDeck}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-solara-gold/15 hover:bg-solara-gold/25 text-solara-gold-light border border-solara-gold/40 text-xs font-semibold backdrop-blur-md transition-all shadow-gold-glow hover:scale-105"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-slate-200 hover:text-white text-xs font-semibold border border-white/10 hover:border-solara-gold/40 backdrop-blur-md transition-all"
             >
               <Presentation className="w-3.5 h-3.5 text-solara-gold" />
               <span>{t('Pitch Deck (P)', 'عرض تقديمي (P)')}</span>
@@ -151,7 +166,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Live Studio CTA */}
             <button
               onClick={onNavigateToStudio}
-              className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-solara-gold-light via-solara-gold to-solara-gold-dark text-solara-navy-dark text-xs font-bold shadow-gold-glow hover:shadow-luxury hover:scale-105 transition-all"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-solara-gold-light via-solara-gold to-solara-gold-dark text-solara-navy-dark text-xs font-bold shadow-gold-glow hover:shadow-luxury hover:scale-105 transition-all"
             >
               <Sparkles className="w-3.5 h-3.5 text-solara-navy-dark" />
               <span>{t('Live Studio', 'الاستوديو الحي')}</span>
@@ -164,80 +179,59 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
               className="px-2.5 py-1 rounded-full bg-solara-gold/15 border border-solara-gold/30 text-solara-gold text-xs font-mono font-bold flex items-center gap-1"
             >
-              <Globe className="w-3 h-3" />
               <span>{language === 'en' ? 'AR' : 'EN'}</span>
             </button>
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white"
+              className="p-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:border-solara-gold/40 transition-colors"
+              aria-label="Toggle navigation menu"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 text-solara-gold" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
 
         </div>
 
-        {/* Mobile Dropdown Menu */}
+        {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className={`2xl:hidden bg-solara-obsidian/95 backdrop-blur-2xl border-b border-white/10 p-6 space-y-4 max-h-[85vh] overflow-y-auto ${
-              isRTL ? 'text-right' : 'text-left'
-            }`}
-          >
-            <div className="space-y-1">
-              {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block p-2.5 rounded-xl bg-white/5 text-slate-200 text-xs font-semibold hover:bg-solara-gold/15 hover:text-solara-gold transition-colors"
-                >
-                  <span className={`text-xs text-solara-gold font-mono ${isRTL ? 'ml-2' : 'mr-2'}`}>
-                    [{item.code}]
-                  </span>
-                  {language === 'en' ? item.labelEn : item.labelAr}
-                </a>
-              ))}
-            </div>
-
-            <div className="pt-3 border-t border-white/10 space-y-2">
+          <div className="2xl:hidden border-t border-white/10 bg-solara-obsidian/95 backdrop-blur-2xl px-4 pt-4 pb-6 mt-3 space-y-2">
+            <div className="grid grid-cols-2 gap-2 mb-4">
+              <a
+                href="https://www.solaraeg.shop/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-solara-gold/20 text-solara-gold-light border border-solara-gold/40 text-xs font-bold"
+              >
+                <ShoppingBag className="w-3.5 h-3.5" />
+                <span>solaraeg.shop</span>
+              </a>
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   onOpenPitchDeck();
                 }}
-                className="w-full flex items-center justify-center gap-2 p-3 rounded-xl bg-solara-gold/15 border border-solara-gold/30 text-solara-gold-light text-xs font-bold"
+                className="flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-white/5 text-slate-200 border border-white/10 text-xs font-semibold"
               >
-                <Presentation className="w-4 h-4" />
-                <span>{t('Launch Pitch Deck (P)', 'فتح العرض التقديمي (Pitch)')}</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenDossier();
-                }}
-                className="w-full flex items-center justify-center gap-2 p-3 rounded-xl bg-white/5 border border-white/10 text-slate-200 text-xs font-bold"
-              >
-                <BookOpen className="w-4 h-4" />
-                <span>{t('Executive Dossier & Strategy', 'المستند التنفيذي ودراسة الحالة')}</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onNavigateToStudio();
-                }}
-                className="w-full flex items-center justify-center gap-2 p-3 rounded-xl bg-gradient-to-r from-solara-gold to-solara-gold-dark text-solara-navy-dark text-xs font-bold shadow-gold-glow"
-              >
-                <Sparkles className="w-4 h-4" />
-                <span>{t('Open Personalization Studio', 'تجربة استوديو التخصيص الحي')}</span>
+                <Presentation className="w-3.5 h-3.5 text-solara-gold" />
+                <span>{t('Pitch Deck', 'عرض تقديمي')}</span>
               </button>
             </div>
-          </motion.div>
+
+            <div className="grid grid-cols-1 gap-1 max-h-[60vh] overflow-y-auto">
+              {navItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="px-3 py-2 rounded-xl text-xs font-medium text-slate-200 hover:bg-white/5 hover:text-solara-gold flex items-center justify-between transition-colors"
+                >
+                  <span>{language === 'en' ? item.labelEn : item.labelAr}</span>
+                  <span className="text-[10px] text-solara-gold font-mono">{item.code}</span>
+                </a>
+              ))}
+            </div>
+          </div>
         )}
       </header>
     </>
